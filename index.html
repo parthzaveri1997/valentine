@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>For Diva 💖</title>
+<title>Diva 💖</title>
 
 <style>
   body {
@@ -12,14 +12,13 @@
     overflow: hidden;
   }
 
-  /* Background collage */
   .background {
     position: fixed;
     inset: 0;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(2, 1fr);
-    z-index: -1;
+    z-index: -2;
   }
 
   .background img {
@@ -31,19 +30,19 @@
   .overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.35);
+    background: rgba(0,0,0,0.4);
+    z-index: -1;
   }
 
   .content {
     position: relative;
-    z-index: 5;
+    top: 35%;
     text-align: center;
     color: white;
-    top: 35%;
   }
 
   h1 {
-    font-size: 42px;
+    font-size: 44px;
     margin-bottom: 30px;
   }
 
@@ -57,12 +56,12 @@
   }
 
   #yes {
-    background: #2d6a4f;
+    background: #ff4d6d;
     color: white;
   }
 
   #no {
-    background: #9d0208;
+    background: #6c757d;
     color: white;
     position: absolute;
   }
@@ -72,10 +71,10 @@
 <body>
 
 <div class="background">
-  <img src="images/bg1.jpg"><img src="images/bg2.jpg">
-  <img src="images/bg3.jpg"><img src="images/bg4.jpg">
-  <img src="images/bg5.jpg"><img src="images/bg6.jpg">
-  <img src="images/bg7.jpg"><img src="images/bg8.jpg">
+  <img src="bg1.jpg"><img src="bg2.jpg">
+  <img src="bg3.jpg"><img src="bg4.jpg">
+  <img src="bg5.jpg"><img src="bg6.jpg">
+  <img src="bg7.jpg"><img src="bg8.jpg">
 </div>
 <div class="overlay"></div>
 
@@ -90,7 +89,7 @@
 
   noBtn.addEventListener("mouseenter", () => {
     noBtn.style.left = Math.random() * (window.innerWidth - 120) + "px";
-    noBtn.style.top = Math.random() * (window.innerHeight - 120) + "px";
+    noBtn.style.top  = Math.random() * (window.innerHeight - 120) + "px";
   });
 
   function goYes() {
