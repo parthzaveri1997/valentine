@@ -1,208 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Will you be my Valentine?</title>
-
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+<meta charset="UTF-8">
+<title>For Diva 💖</title>
 
 <style>
-:root {
-  --bg1:#ffd6e7;
-  --bg2:#ffeef6;
-  --card:#ffffffcc;
-  --yes:#ff3b7a;
-  --yesHover:#ff1f68;
-}
+  body {
+    margin: 0;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+  }
 
-*{box-sizing:border-box}
+  /* Background collage */
+  .background {
+    position: fixed;
+    inset: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    z-index: -1;
+  }
 
-body{
-  margin:0;
-  min-height:100svh;
-  display:grid;
-  place-items:center;
-  background:radial-gradient(circle at top,var(--bg2),var(--bg1));
-  font-family:system-ui,sans-serif;
-  overflow:hidden;
-  padding:16px;
-}
+  .background img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 
-/* CONFETTI */
-#confettiCanvas{
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  z-index:9999;
-}
+  .overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.35);
+  }
 
-/* CARD */
-.card{
-  width:min(720px,92vw);
-  padding:26px 22px;
-  background:var(--card);
-  backdrop-filter:blur(10px);
-  border-radius:22px;
-  text-align:center;
-  box-shadow:0 18px 60px rgba(0,0,0,.15);
-}
+  .content {
+    position: relative;
+    z-index: 5;
+    text-align: center;
+    color: white;
+    top: 35%;
+  }
 
-/* BUTTONS */
-.button-zone{
-  position:relative;
-  width:min(520px,92%);
-  height:150px;
-  margin:0 auto;
-  touch-action:none;
-}
+  h1 {
+    font-size: 42px;
+    margin-bottom: 30px;
+  }
 
-button{
-  position:absolute;
-  top:50%;
-  transform:translateY(-50%);
-  padding:16px 24px;
-  font-size:18px;
-  font-weight:800;
-  border-radius:999px;
-  border:none;
-  cursor:pointer;
-  box-shadow:0 10px 24px rgba(0,0,0,.14);
-}
+  button {
+    padding: 14px 28px;
+    font-size: 20px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    margin: 10px;
+  }
 
-#yesBtn{
-  left:18%;
-  background:var(--yes);
-  color:#fff;
-}
-#yesBtn:hover{background:var(--yesHover)}
+  #yes {
+    background: #2d6a4f;
+    color: white;
+  }
 
-#noBtn{
-  left:62%;
-  background:#e5e7eb;
-}
-
-/* RESULT */
-.result{
-  display:none;
-  animation:pop .35s ease;
-}
-
-@keyframes pop{
-  from{transform:scale(.96);opacity:0}
-  to{transform:scale(1);opacity:1}
-}
-
-/* MESSAGE */
-#message{
-  display:none;
-  margin-top:20px;
-  font-size:18px;
-  line-height:1.6;
-}
-
-/* BLACKOUT */
-#blackout{
-  position:fixed;
-  inset:0;
-  background:black;
-  opacity:0;
-  transition:opacity 2s ease;
-  z-index:10000;
-  display:grid;
-  place-items:center;
-}
-
-#sunflower{
-  font-size:80px;
-}
+  #no {
+    background: #9d0208;
+    color: white;
+    position: absolute;
+  }
 </style>
 </head>
 
 <body>
 
-<canvas id="confettiCanvas"></canvas>
-
-<main class="card">
-
-<h1>nirali will you be my valentine?</h1>
-
-<section class="button-zone" id="zone">
-  <button id="yesBtn">Yes</button>
-  <button id="noBtn">No</button>
-</section>
-
-<div class="result" id="result">
-  <h2>YAY! 🎉</h2>
+<div class="background">
+  <img src="images/bg1.jpg"><img src="images/bg2.jpg">
+  <img src="images/bg3.jpg"><img src="images/bg4.jpg">
+  <img src="images/bg5.jpg"><img src="images/bg6.jpg">
+  <img src="images/bg7.jpg"><img src="images/bg8.jpg">
 </div>
+<div class="overlay"></div>
 
-<div id="message">
-  Every little moment with you feels special 🌻<br><br>
-  Thank you for being with me and selecting <b>YES</b>,
-  when you had the option of <b>NO</b> 😂<br><br>
-  Happy Valentine’s Day to my favorite human 💘<br><br>
-  Life is just better, brighter, and more fun with you by my side ❤️🧿
+<div class="content">
+  <h1>Diva, will you be my Valentine? 💖</h1>
+  <button id="yes" onclick="goYes()">Yes 💘</button>
+  <button id="no">No 💔</button>
 </div>
-
-</main>
-
-<div id="blackout">
-  <div id="sunflower">🌻</div>
-</div>
-
-<audio id="music">
-  <source src="romantic.mp3" type="audio/mpeg">
-</audio>
 
 <script>
-const zone=document.getElementById("zone");
-const yesBtn=document.getElementById("yesBtn");
-const noBtn=document.getElementById("noBtn");
-const result=document.getElementById("result");
-const message=document.getElementById("message");
-const music=document.getElementById("music");
+  const noBtn = document.getElementById("no");
 
-/* CONFETTI SETUP */
-const canvas=document.getElementById("confettiCanvas");
-const confettiInstance=confetti.create(canvas,{resize:true,useWorker:true});
+  noBtn.addEventListener("mouseenter", () => {
+    noBtn.style.left = Math.random() * (window.innerWidth - 120) + "px";
+    noBtn.style.top = Math.random() * (window.innerHeight - 120) + "px";
+  });
 
-function burst(){
-  confettiInstance({particleCount:200,spread:120,origin:{y:.6}});
-}
-
-/* YES GROWS */
-let yesScale=1;
-function growYes(){
-  yesScale=Math.min(2.2,yesScale+.1);
-  yesBtn.style.transform=`translateY(-50%) scale(${yesScale})`;
-}
-
-/* NO RUNS */
-function clamp(n,min,max){return Math.max(min,Math.min(max,n))}
-zone.addEventListener("pointermove",e=>{
-  const b=noBtn.getBoundingClientRect();
-  const d=Math.hypot(
-    (b.left+b.width/2)-e.clientX,
-    (b.top+b.height/2)-e.clientY
-  );
-  if(d<140){
-    const z=zone.getBoundingClientRect();
-    noBtn.style.left=clamp(Math.random()*(z.width-b.width),0,z.width-b.width)+"px";
-    noBtn.style.top=clamp(Math.random()*(z.height-b.height),0,z.height-b.height)+"px";
-    growYes();
+  function goYes() {
+    window.location.href = "yes.html";
   }
-});
+</script>
 
-/* YES CLICK */
-yesBtn.addEventListener("click",()=>{
-  zone.style.display="none";
-  result.style.display="block";
-  music.play();
-  burst();
-
-  setTimeout(()=>message.style.display="block",4000);
-
-  setTimeout(()=>{
-    document.getElementById("blackout").style.opacity="1";
-    let fade=setInterval(()=>{
-      if(music.volume>0.05) music.volume-=0
+</body>
+</html>
