@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>YAYYYYY 💖</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;1,600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      font-family: 'Playfair Display', serif;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    /* Background images */
+    .background {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      z-index: -1;
+    }
+
+    .background img {
+      width: 50%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    h1 {
+      margin-top: 35vh;
+      font-size: 64px;
+      color: #c9184a;
+      transform: scale(0);
+      animation: zoomIn 1.2s ease-out forwards;
+    }
+
+    @keyframes zoomIn {
+      to { transform: scale(1); }
+    }
+
+    #message {
+      display: none;
+      margin: 40px auto;
+      font-size: 24px;
+      line-height: 1.7;
+      background: rgba(255,255,255,0.92);
+      padding: 32px;
+      border-radius: 24px;
+      width: 85%;
+      max-width: 650px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Background -->
+  <div class="background">
+    <img src="images/bgA.jpg">
+    <img src="images/BGB.jpg">
+  </div>
+
+  <div id="message">
+    Every little moment with you feels special 🌻<br><br>
+    Thank you for being with me and selecting <b>YES</b>,
+    when you had the option of <b>NO</b> 😂<br><br>
+    Happy Valentine’s Day to my favorite human 💘<br><br>
+    Life is just better, brighter, and more fun with you by my side ❤️🧿
+  </div>
+
+  <!-- Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <script>
+    confetti({
+      particleCount: 300,
+      spread: 140,
+      origin: { y: 0.6 }
+    });
+
+    setTimeout(() => {
+      document.getElementById("message").style.display = "block";
+    }, 5000);
+  </script>
+
+</body>
+</html>
