@@ -2,14 +2,15 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Diva 💖</title>
 
 <style>
   body {
     margin: 0;
     height: 100vh;
-    font-family: Arial, sans-serif;
     overflow: hidden;
+    font-family: Arial, sans-serif;
   }
 
   /* Background collage */
@@ -38,28 +39,30 @@
   .content {
     position: relative;
     z-index: 2;
-    top: 35%;
+    top: 30%;
     text-align: center;
     color: white;
+    padding: 0 16px;
   }
 
   h1 {
-    font-size: 44px;
+    font-size: clamp(26px, 6vw, 44px);
     margin-bottom: 30px;
   }
 
   .buttons {
     position: relative;
-    height: 120px;
+    height: 140px;
+    max-width: 320px;
+    margin: 0 auto;
   }
 
   button {
     padding: 14px 28px;
     font-size: 20px;
-    border: none;
     border-radius: 12px;
+    border: none;
     cursor: pointer;
-    margin: 10px;
   }
 
   #yes {
@@ -72,13 +75,32 @@
     color: white;
     position: absolute;
     left: 55%;
+    top: 60px;
+  }
+
+  /* 📱 MOBILE LAYOUT */
+  @media (max-width: 768px) {
+    .background {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(4, 1fr);
+    }
+
+    .content {
+      top: 25%;
+    }
+
+    .buttons {
+      height: 180px;
+    }
+
+    #no {
+      top: 100px;
+    }
   }
 </style>
 </head>
 
 <body>
-
-<img src="bg1.jpg" style="position:fixed;top:0;left:0;width:200px;z-index:999;">
 
 <div class="background">
   <img src="./bg1.jpg">
@@ -97,7 +119,7 @@
   <h1>Diva, will you be my Valentine? 💖</h1>
 
   <div class="buttons">
-    <button id="yes" onclick="goYes()">Yes 💘</button>
+    <button id="yes" onclick="location.href='yes.html'">Yes 💘</button>
     <button id="no">No 💔</button>
   </div>
 </div>
@@ -105,14 +127,19 @@
 <script>
   const noBtn = document.getElementById("no");
 
-  noBtn.addEventListener("mouseenter", () => {
-    noBtn.style.left = Math.random() * 70 + "%";
-    noBtn.style.top  = Math.random() * 60 + "px";
-  });
-
-  function goYes() {
-    window.location.href = "yes.html";
+  function moveNo() {
+    noBtn.style.left = Math.random() * 60 + "%";
+    noBtn.style.top  = Math.random() * 100 + "px";
   }
+
+  // Desktop (mouse)
+  noBtn.addEventListener("mouseenter", moveNo);
+
+  // Mobile (touch)
+  noBtn.addEventListener("touchstart", (e) => {
+    e.preventDefault();
+    moveNo();
+  });
 </script>
 
 </body>
