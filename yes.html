@@ -1,91 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>YAYYYYY 💖</title>
+<meta charset="UTF-8">
+<title>YAYYYYY 💖</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;1,600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      font-family: 'Playfair Display', serif;
-      overflow: hidden;
-      text-align: center;
-    }
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+    background: #ffe6ef;
+    text-align: center;
+    overflow: hidden;
+  }
 
-    /* Background images */
-    .background {
-      position: fixed;
-      inset: 0;
-      display: flex;
-      z-index: -1;
-    }
+  h1 {
+    margin-top: 25vh;
+    font-size: 56px;
+    color: #c9184a;
+  }
 
-    .background img {
-      width: 50%;
-      height: 100%;
-      object-fit: cover;
-    }
+  #musicBtn {
+    margin-top: 15px;
+    padding: 10px 22px;
+    font-size: 16px;
+    border-radius: 10px;
+    border: none;
+    background: #ffb703;
+    cursor: pointer;
+  }
 
-    h1 {
-      margin-top: 35vh;
-      font-size: 64px;
-      color: #c9184a;
-      transform: scale(0);
-      animation: zoomIn 1.2s ease-out forwards;
-    }
+  #message {
+    display: none;
+    margin: 30px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    max-width: 600px;
+    font-size: 20px;
+    line-height: 1.6;
+  }
 
-    @keyframes zoomIn {
-      to { transform: scale(1); }
-    }
+  .emoji {
+    position: absolute;
+    bottom: -50px;
+    font-size: 28px;
+    animation: floatUp 6s linear forwards;
+    pointer-events: none;
+  }
 
-    #message {
-      display: none;
-      margin: 40px auto;
-      font-size: 24px;
-      line-height: 1.7;
-      background: rgba(255,255,255,0.92);
-      padding: 32px;
-      border-radius: 24px;
-      width: 85%;
-      max-width: 650px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-    }
-  </style>
+  @keyframes floatUp {
+    from { transform: translateY(0); opacity: 1; }
+    to { transform: translateY(-120vh); opacity: 0; }
+  }
+</style>
 </head>
 
 <body>
 
-  <!-- Background -->
-  <div class="background">
-    <img src="images/bgA.jpg">
-    <img src="images/BGB.jpg">
-  </div>
+<h1>YAYYYYY 💖</h1>
 
-  <div id="message">
-    Every little moment with you feels special 🌻<br><br>
-    Thank you for being with me and selecting <b>YES</b>,
-    when you had the option of <b>NO</b> 😂<br><br>
-    Happy Valentine’s Day to my favorite human 💘<br><br>
-    Life is just better, brighter, and more fun with you by my side ❤️🧿
-  </div>
+<button id="musicBtn">Tap to play music 🎶</button>
 
-  <!-- Confetti -->
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<div id="message">
+  Every little moment with you feels special 🌻<br><br>
+  Thank you for being with me and selecting <b>YES</b>,
+  when you had the option of <b>NO</b> 😂<br><br>
+  Happy Valentine’s Day to my favorite human 💘<br><br>
+  Life is just better, brighter, and more fun with you by my side ❤️🧿
+</div>
 
-  <script>
-    confetti({
-      particleCount: 300,
-      spread: 140,
-      origin: { y: 0.6 }
-    });
+<audio id="music" loop>
+  <source src="romantic.mp3" type="audio/mpeg">
+</audio>
 
-    setTimeout(() => {
-      document.getElementById("message").style.display = "block";
-    }, 5000);
-  </script>
+<script>
+  // Confetti immediately
+  confetti({ particleCount: 200, spread: 120, origin: { y: 0.6 } });
+
+  const music = document.getElementById("music");
+  const musicBtn = document.getElementById("musicBtn");
+
+  musicBtn.onclick = () => {
+    music.play();
+    musicBtn.style.display = "none";
+    document.getElementById("message").style.display = "block";
+  };
+
+  // Floating emojis
+  setInterval(() => {
+    const emojis = ["❤️","🌻","💋","xoxo"];
+    const el = document.createElement("div");
+    el.className = "emoji";
+    el.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+    el.style.left = Math.random() * 100 + "vw";
+    el.style.fontSize = Math.random() * 20 + 24 + "px";
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 6000);
+  }, 400);
+</script>
 
 </body>
 </html>
